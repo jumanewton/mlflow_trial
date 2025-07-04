@@ -15,21 +15,21 @@ mlflow.set_tracking_uri("http://mlflow:5000")
 # Set the experiment name
 mlflow.set_experiment("Iris_Experiment")
 
-# Dynamically fetch latest Production model
+# Dynamically fetch latest registered model version
 model_name = "IrisModel"
 client = MlflowClient()
-latest_production_version = None
 
-# Look for latest production model version
-for mv in client.search_model_versions(f"name='{model_name}'"):
-    if mv.current_stage == "Production":
-        latest_production_version = mv.version
-        break
+# Get all registered versions
+versions = [int(mv.version) for mv in client.search_model_versions(f"name='{model_name}'")]
 
-if latest_production_version is None:
-    raise Exception(f"No production model version found for {model_name}")
+if not versions:
+    raise Exception(f"No registered model versions found for {model_name}")
 
-model = mlflow.pyfunc.load_model(f"models:/{model_name}/{latest_production_version}")
+# Select the latest version
+latest_version = max(versions)
+
+# Load the latest version
+model = mlflow.pyfunc.load_model(f"models:/{model_name}/{latest_version}")
 
 # Request schema
 class Features(BaseModel):

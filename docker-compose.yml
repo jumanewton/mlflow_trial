@@ -17,6 +17,14 @@ services:
       --default-artifact-root /mlflow_artifacts 
       --host 0.0.0.0
 
+  trainer:
+    build: .
+    depends_on:
+      - mlflow
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+    command: python model_train.py
+
 
   app:
     build: .
@@ -26,3 +34,5 @@ services:
       - "8000:8000"
     environment:
       - MLFLOW_TRACKING_URI=http://mlflow:5000
+    volumes:
+      - ./mlruns:/mlflow_artifacts
