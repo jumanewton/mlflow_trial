@@ -1,0 +1,28 @@
+services:
+  
+  mlflow:
+    build:
+      context: ./mlflow_server
+    ports:
+      - "5000:5000"
+    environment:
+      - MLFLOW_TRACKING_URI=http://0.0.0.0:5000
+      - MLFLOW_ARTIFACT_ROOT=/mlflow_artifacts
+    volumes:
+      - ./mlruns:/mlflow_artifacts
+      - ./mlflow.db:/mlflow.db
+    command: >
+      server 
+      --backend-store-uri sqlite:///mlflow.db 
+      --default-artifact-root /mlflow_artifacts 
+      --host 0.0.0.0
+
+
+  app:
+    build: .
+    depends_on:
+      - mlflow
+    ports:
+      - "8000:8000"
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow:5000

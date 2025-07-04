@@ -1,0 +1,66 @@
+.env
+**/pinecone.env
+# Ignore Pinecone API key file
+# This file contains sensitive information and should not be shared or committed to version control.
+.env.local
+# Local environment variables
+.env.development.local
+# Development environment variables
+.env.test.local
+# Test environment variables
+.env.production.local
+# Production environment variables
+# Ignore all .env files in the project
+# This is a common practice to prevent sensitive information from being exposed.
+pycaches/
+# Ignore Python bytecode cache directories
+__pycache__/
+# Ignore Python bytecode cache directories
+*.py[cod]
+# Ignore Python bytecode files
+*.pyo
+# Ignore Python optimized files
+*.pyd
+# Ignore Python dynamic module files
+*.pdb
+# Ignore Python debug files
+*.egg
+# Ignore Python egg files
+*.egg-info/
+# Ignore Python egg info directories
+dist/
+# Ignore distribution directories
+build/
+# Ignore build directories
+*.whl
+# Ignore Python wheel files
+*.tar.gz
+# Ignore Python source distribution files
+*.zip
+# Ignore Python zip files
+*.log
+# Ignore log files
+*.sqlite3
+# Ignore SQLite database files
+*.db
+# Ignore database files
+*.DS_Store
+# Ignore macOS Finder metadata files
+*.vscode/
+# Ignore Visual Studio Code workspace settings
+.idea/
+# Ignore JetBrains IDE settings
+*.iml
+# Ignore IntelliJ IDEA module files
+*.swp
+# Ignore Vim swap files
+*.swo
+# Ignore Vim swap files
+*.bak
+# Ignore backup files
+*.tmp
+# Ignore temporary files
+*.temp
+# Ignore temporary files
+*.orig
+# Ignore original files
